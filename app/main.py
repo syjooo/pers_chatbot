@@ -1,12 +1,6 @@
-from fastapi import FastAPI
-from app.routers import cornsoupchat_router, meritdescribe_router
+import uvicorn
+from app import app
 
-app = FastAPI(title="PromptPipeline API")
-
-# 라우터 등록
-app.include_router(cornsoupchat_router.router, prefix="/chat", tags=["CornSoup Chatbot"])
-app.include_router(meritdescribe_router.router, prefix="/merit", tags=["MeritDescribe"])
-
-@app.get("/")
-async def root():
-    return {"message": "Welcome to the PromptPipeline API"}
+# FastAPI 실행
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
